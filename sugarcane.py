@@ -1,23 +1,147 @@
-import pandas as pd
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-data = {
-    'new_plant': [0, 0, 32, 0, 0, 0, 0, 0, 50, 0, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 30, 77, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 100, 0, 0, 0, 0, 43, 19, 0, 0, 45, 0, 0, 17, 15, 0, 27, 15, 0, 27, 0, 135, 0, 17, 10],
-    'first_ratoon': [21, 0, 0, 0, 0, 30, 10, 0, 50, 30, 0, 20, 0, 10, 10, 0, 0, 0, 0, 39, 100, 50, 50, 0, 40, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 20, 0, 21, 20, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 14, 55, 10, 0, 0, 0, 180, 0, 50, 0, 41, 0, 0, 0, 0, 45, 0, 0, 0, 21, 0, 139, 14, 61, 45, 0, 10, 53, 0],
-    'second_ratoon': [272, 200, 272, 80, 0, 280, 0, 40, 0, 80, 0, 0, 0, 0, 0, 400, 120, 0, 108, 0, 0, 0, 80, 0, 0, 0, 0, 200, 0, 40, 40, 40, 0, 80, 40, 0, 1000, 0, 0, 0, 200, 0, 200, 0, 204, 0, 200, 0, 40, 0, 40, 0, 0, 0, 0, 0, 0, 0, 40, 200, 200, 0, 0, 0, 144, 0, 0, 0, 112, 60, 0, 0, 0, 64, 552, 168, 0, 0, 284, 0],
-    'third_ratoon': [316, 200, 0, 0, 200, 0, 0, 0, 232, 100, 0, 0, 400, 0, 0, 0, 0, 204, 112, 296, 0, 0, 148, 200, 0, 0, 40, 400, 40, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 160, 0, 160, 760, 352, 0, 952, 0, 276, 0, 0, 0, 0, 200, 200, 0, 80, 0, 0, 0, 240, 0, 200, 0, 0, 0, 80, 144, 0, 0, 0, 232, 0, 0, 248, 0, 0, 0, 0],
-    'soil': ["black_clay", "black_clay", "black_clay", "loam", "black_clay", "black_clay", "clay", "black_clay", "black_clay", "black_clay", "sandy", "black_clay", "black_clay", "black_clay", "sandy", "black_clay", "black_clay", "loam", "black_clay", "black_clay", "loam", "red_loam", "black_clay", "black_clay", "sandy", "black_clay", "black_clay", "black_clay", "black_clay", "sandy", "black_clay", "black_clay", "clay", "clay", "clay", "clay", "clay", "clay", "black_clay", "loam", "black_clay", "black_clay", "black_clay", "black_clay", "black_clay", "clay", "black_clay", "black_clay", "black_clay", "black_clay", "red_clay", "black_clay", "black_clay", "black_clay", "black_clay", "red_loam", "red_loam", "black_clay", "black_clay", "red_clay", "black_clay", "black_clay", "black_clay", "black_clay", "clay", "black_clay", "black_clay", "black_clay", "black_clay", "black_clay", "loam", "black_clay", "black_clay", "black_clay", "black_clay", "black_clay", "K84-200", "K84-200", "LK11", "K84-200"],
-    'variety': ["K84-200", "K84-200", "LK11", "K84-200", "LK11", "K84-200", "K84-200", "K84-200", "K84-200", "LK11", "LK11", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "LK11", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "LK11", "LK11", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "LK11", "K84-200", "LK11", "K84-200", "K84-200", "K84-200", "K84-200", "LK11", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "K84-200", "LK11", "K84-200"],
-    'fresh_cane_yield': [473.45, 1079.98, 504.48, 255.25, 193.41, 505.44, 154.06, 303.5, 341, 219.11, 295.68, 153.98, 832.53, 884.52, 100.21, 159.92, 138.74, 149.18, 187.37, 1132.63, 527.71, 650.55, 196.96, 446.73, 156.48, 796.65, 191.6, 1509.58, 105.64, 954.7, 213.16, 153.24, 474.97, 1979.13, 156.44, 103.11, 268.06, 145.68, 103.13, 179.73, 284.73, 202.44, 589.94, 368.48, 361.05, 158.42, 334.31, 583.4, 103.21, 596.84, 396.72, 237.89, 219.35, 138.63, 233.17, 240.72, 130.67, 682.72, 108.97, 639.14, 132.35, 254.5, 168.96, 219.33, 157.13, 475.2, 107.37, 344.58, 544.28, 226.9, 148.53, 370.64, 905.72, 379.89, 794.24, 368.83, 439.76, 191.62, 693.82, 541.53],
-    'burnt_cane_yield': [26490, 48550, 37930, 37580, 31850, 32520, 90820, 99180, 95160, 77430, 27510, 55080, 45040, 36790, 87830, 45280, 97870, 90740, 21770, 54650, 40220, 36850, 27710, 80240, 86130, 37610, 46660, 84780, 85520, 91600, 97370, 44030, 68840, 40010, 28380, 96420, 49600, 97450, 96040, 62380, 84030, 88630, 22470, 85330, 67000, 21320, 81030, 20320, 60600, 66530, 61420, 43060, 88080, 23360, 53250, 91660, 54460, 81660, 59170, 96380, 24630, 50790, 39950, 23870, 57690, 94960, 38010, 78000, 99270, 40690, 66020, 28970, 92680, 89050, 58640, 63140, 86090, 92430, 93200, 22740],
-    'Sweet': ["Low", "Medium", "Medium", "Low", "Medium", "Low", "Medium", "Medium", "Medium", "Low", "High", "High", "Medium", "High", "Medium", "Low", "Medium", "Medium", "Medium", "Medium", "Medium", "Medium", "Medium", "Low", "High", "High", "Low", "Medium", "Medium", "Medium", "High", "Low", "Medium", "Low", "Low", "Medium", "Low", "High", "High", "High", "High", "High", "Medium", "Medium", "Low", "Low", "High", "High", "High", "Medium", "High", "High", "High", "High", "High", "High", "High", "Medium", "High", "High", "Medium", "Low", "Medium", "Medium", "High", "High", "Medium", "High", "Medium", "Low", "High", "High", "Medium", "Medium", "Medium", "High", "Low", "High", "High", "Medium"]
-}
+"""
+Sugarcane Sweetness Prediction (no sklearn version)
+---------------------------------------------------
+Model: Naive Bayes (manual implementation)
+Input files:
+ - train.csv : contains all attributes + Sweet (target)
+ - test.csv  : contains all attributes without Sweet
+Output:
+ - <student_id>.txt : each line is the predicted sweetness (High/Medium/Low)
+"""
 
-df = pd.DataFrame(data)
+import csv, math, statistics
+from collections import defaultdict, Counter
 
-# train your model
+STUDENT_ID = "67160378"  #เปลี่ยนเป็นรหัสนิสิตของคุณ
+TARGET = "Sweet"
+CAT_TOKEN = "UNK"
+EPS = 1e-9
 
-# read test data from keyboard
-# test_data = input()  -> Example: 10 0 0 0 clay K84-200 541.53 22740
 
-#predicted = model.predict(test_data)
-#print(predicted) -> Example: Medium
+# --- Helper functions ---
+def try_float(x):
+    try:
+        if x is None or str(x).strip() == "":
+            return None
+        return float(x)
+    except:
+        return None
+
+
+def read_csv(file):
+    with open(file, "r", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
+
+def detect_types(rows):
+    """ตรวจว่าคอลัมน์ไหนเป็นตัวเลข (num) หรือกลุ่ม (cat)"""
+    sample = rows[0]
+    types = {}
+    for col in sample:
+        if col == TARGET: continue
+        vals = [try_float(r[col]) for r in rows]
+        ratio = sum(v is not None for v in vals) / len(vals)
+        types[col] = "num" if ratio > 0.7 else "cat"
+    return types
+
+
+# --- Naive Bayes model ---
+class NaiveBayes:
+    def __init__(self, types):
+        self.types = types
+        self.classes = []
+        self.class_counts = Counter()
+        self.priors = {}
+        self.num_stats = defaultdict(dict)  # {cls: {feat: (mean,var)}}
+        self.cat_counts = defaultdict(lambda: defaultdict(Counter))
+        self.cat_vocab = defaultdict(set)
+        self.global_median = {}
+
+    def fit(self, rows):
+        # median สำหรับ missing numeric
+        for feat, t in self.types.items():
+            if t == "num":
+                vals = [try_float(r[feat]) for r in rows if try_float(r[feat]) is not None]
+                self.global_median[feat] = statistics.median(vals) if vals else 0.0
+
+        # แยกข้อมูลตามคลาส
+        by_cls = defaultdict(list)
+        for r in rows:
+            y = str(r[TARGET]).strip()
+            if not y: continue
+            self.class_counts[y] += 1
+            by_cls[y].append(r)
+            for feat, t in self.types.items():
+                if t == "cat":
+                    v = r[feat].strip() if r[feat] else CAT_TOKEN
+                    self.cat_vocab[feat].add(v)
+
+        total = sum(self.class_counts.values())
+        self.classes = sorted(self.class_counts.keys())
+        self.priors = {c: self.class_counts[c] / total for c in self.classes}
+
+        # คำนวณ mean/var
+        for c in self.classes:
+            for feat, t in self.types.items():
+                if t == "num":
+                    vals = [try_float(r[feat]) for r in by_cls[c]]
+                    vals = [self.global_median[feat] if v is None else v for v in vals]
+                    if not vals:
+                        mu, var = 0.0, 1.0
+                    else:
+                        mu = sum(vals)/len(vals)
+                        var = sum((x-mu)**2 for x in vals)/(len(vals)-1 or 1)
+                        var = var if var > 0 else EPS
+                    self.num_stats[c][feat] = (mu, var)
+                else:
+                    for r in by_cls[c]:
+                        v = r[feat].strip() if r[feat] else CAT_TOKEN
+                        self.cat_counts[c][feat][v] += 1
+
+    def _log_gauss(self, x, mean, var):
+        return -0.5*math.log(2*math.pi*var) - (x-mean)**2/(2*var)
+
+    def predict_row(self, r):
+        scores = {}
+        for c in self.classes:
+            logp = math.log(self.priors[c] + EPS)
+            for feat, t in self.types.items():
+                if t == "num":
+                    x = try_float(r[feat]) or self.global_median[feat]
+                    mean, var = self.num_stats[c][feat]
+                    logp += self._log_gauss(x, mean, var)
+                else:
+                    v = r[feat].strip() if r[feat] else CAT_TOKEN
+                    cnt = self.cat_counts[c][feat][v]
+                    V = len(self.cat_vocab[feat])
+                    prob = (cnt + 1) / (self.class_counts[c] + V)
+                    logp += math.log(prob)
+            scores[c] = logp
+        return max(scores, key=scores.get)
+
+    def predict(self, rows):
+        return [self.predict_row(r) for r in rows]
+
+
+# --- Main ---
+def main():
+    train = read_csv("C:\\Users\\USER\\OneDrive\\Desktop\\BUU68\\AI 68\\Term Project\\train.csv")
+    test = read_csv("C:\\Users\\USER\\OneDrive\\Desktop\\BUU68\\AI 68\\Term Project\\test.csv")
+
+    types = detect_types(train)
+    model = NaiveBayes(types)
+    model.fit(train)
+    preds = model.predict(test)
+
+    out = f"{STUDENT_ID}.txt"
+    with open(out, "w", encoding="utf-8") as f:
+        for p in preds:
+            f.write(p + "\n")
+    print(f"เขียนผลลัพธ์แล้วที่ {out} ({len(preds)} แถว)")
+
+
+if __name__ == "__main__":
+    main()
